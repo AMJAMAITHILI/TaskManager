@@ -4,7 +4,9 @@ import axios from 'axios';
 import TaskForm from './components/TaskForm';
 import TaskList from './components/TaskList';
 import TaskFilters from './components/TaskFilters';
+import TimeTable from './components/TimeTable';
 import './App.css';
+import './components/TimeTable.css';
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -107,21 +109,29 @@ function App() {
         <p>DBMS ASSIGNMENT-2 _ MONGODB APPLICATION</p>
       </header>
       
-      <TaskForm addTask={addTask} />
-      
-      {error && <div className="error">{error}</div>}
-      
-      <TaskFilters filters={filters} setFilters={setFilters} />
-      
-      {isLoading ? (
-        <div className="loading">Loading tasks...</div>
-      ) : (
-        <TaskList 
-          tasks={filteredTasks} 
-          deleteTask={deleteTask} 
-          toggleComplete={toggleComplete} 
-        />
-      )}
+      <div className="app-layout">
+        <div className="task-section">
+          <TaskForm addTask={addTask} />
+          
+          {error && <div className="error">{error}</div>}
+          
+          <TaskFilters filters={filters} setFilters={setFilters} />
+          
+          {isLoading ? (
+            <div className="loading">Loading tasks...</div>
+          ) : (
+            <TaskList 
+              tasks={filteredTasks} 
+              deleteTask={deleteTask} 
+              toggleComplete={toggleComplete} 
+            />
+          )}
+        </div>
+        
+        <div className="timetable-section">
+          <TimeTable />
+        </div>
+      </div>
     </div>
   );
 }
